@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bearish Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="TD2.css"/>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     HEADER
+═══════════════════════════════════════ -->
+<header class="header">
+  <div class="logo">BEARISH</div>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#products">Shop</a>
+    <a href="#new-products">New</a>
+    <a href="#newsletter">Contact</a>
+  </nav>
+
+  <div class="header-actions">
+    <!-- Search trigger -->
+    <button class="icon-btn" id="searchToggle" aria-label="Tìm kiếm">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+    </button>
+
+    <!-- Cart trigger -->
+    <button class="icon-btn" id="cartToggle" aria-label="Giỏ hàng">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 0 1-8 0"/>
+      </svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════
+     FEATURE 1: SEARCH OVERLAY
+═══════════════════════════════════════ -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-container">
+    <button class="search-close" id="searchClose" aria-label="Đóng">✕</button>
+    <p class="search-label">Tìm kiếm sản phẩm</p>
+    <div class="search-input-wrap">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" id="searchInput" placeholder="Nhập tên sản phẩm..." autocomplete="off"/>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+    <div class="search-suggestions">
+      <span>Gợi ý:</span>
+      <button class="suggest-tag" onclick="doSearch('Gấu')">Gấu</button>
+      <button class="suggest-tag" onclick="doSearch('Fuggler')">Fuggler</button>
+      <button class="suggest-tag" onclick="doSearch('Thỏ')">Thỏ</button>
+      <button class="suggest-tag" onclick="doSearch('Rồng')">Rồng</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     FEATURE 2: SLIDE-OUT CART
+═══════════════════════════════════════ -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Giỏ hàng">
+  <div class="cart-header">
+    <h3>🛒 Giỏ hàng</h3>
+    <button class="cart-close" id="cartClose" aria-label="Đóng">✕</button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty" id="cartEmpty">
+      <div class="cart-empty-icon">🧸</div>
+      <p>Giỏ hàng trống</p>
+      <span>Hãy thêm vài chú gấu vào nhé!</span>
+    </div>
+    <ul class="cart-list" id="cartList"></ul>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">
+      <span>Tổng cộng</span>
+      <strong id="cartTotal">0đ</strong>
+    </div>
+    <button class="btn-checkout">Thanh toán ngay →</button>
+    <button class="btn-continue" onclick="closeCart()">← Tiếp tục mua sắm</button>
+  </div>
+</aside>
+
+
+<!-- ═══════════════════════════════════════
+     HERO
+═══════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-text">
+    <span class="hero-tag">✦ BST Xuân – Hè 2026</span>
+    <h1>Bộ sưu tập gấu bông<br/><em>Xuân – Hè 2026</em></h1>
+    <p>Ôm lấy trái tim bạn · Nâng niu từng chú gấu</p>
+    <button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop Now →</button>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     FEATURES STRIP (web features)
+═══════════════════════════════════════ -->
+<section class="features">
+  <div class="feature">
+    <div class="feature-icon">🚚</div>
+    <h3>Free Shipping</h3>
+    <p>Miễn phí vận chuyển toàn quốc</p>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">💬</div>
+    <h3>24/7 Support</h3>
+    <p>Hỗ trợ khách hàng mọi lúc</p>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">🔒</div>
+    <h3>Secure Payment</h3>
+    <p>Thanh toán an toàn</p>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">↩️</div>
+    <h3>Easy Return</h3>
+    <p>Đổi trả trong 7 ngày</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     SẢN PHẨM NỔI BẬT
+═══════════════════════════════════════ -->
+<section class="products" id="products">
+  <div class="section-head">
+    <h2>CÁC SẢN PHẨM NỔI BẬT</h2>
+    <p>Được yêu thích nhất mùa này</p>
+  </div>
+
+  <div class="product-grid">
+
+    <div class="product" data-name="Ngựa bông mềm mại" data-price="1200000">
+      <span class="prod-badge badge-hot">Hot</span>
+      <div class="prod-img-wrap">
+        <img src="https://kallos.co/cdn/shop/files/ngua-bong-jellycat-canterneigh-pony_5_1024x1024.jpg?v=1766049948" alt="Ngựa bông mềm mại" loading="lazy"/>
+      </div>
+      <div class="prod-info">
+        <h4>Ngựa bông mềm mại</h4>
+        <p class="prod-price">1.200.000đ</p>
+        <button class="btn-add" onclick="addToCart(this)">+ Thêm vào giỏ</button>
+      </div>
+    </div>
+
+    <div class="product" data-name="Túi trà bé nhỏ" data-price="599000">
+      <div class="prod-img-wrap">
+        <img src="https://cdn11.bigcommerce.com/s-fz2bnmwg7y/images/stencil/2560w/products/4400/122982/A4TEAB__43226.1.jpg" alt="Túi trà bé nhỏ" loading="lazy"/>
+      </div>
+      <div class="prod-info">
+        <h4>Túi trà bé nhỏ</h4>
+        <p class="prod-price">599.000đ</p>
+        <button class="btn-add" onclick="addToCart(this)">+ Thêm vào giỏ</button>
+      </div>
+    </div>
+
+    <div class="product" data-name="Chú vịt buồn bã" data-price="899000">
+      <span class="prod-badge badge-new">New</span>
+      <div class="prod-img-wrap">
+        <img src="https://cherriebaby.com.au/cdn/shop/files/jellycat-delia-duck-soft-toy-jellycat-777977_720x.jpg?v=1734497107" alt="Chú vịt buồn bã" loading="lazy"/>
+      </div>
+      <div class="prod-info">
+        <h4>Chú vịt buồn bã</h4>
+        <p class="prod-price">899.000đ</p>
+        <button class="btn-add" onclick="addToCart(this)">+ Thêm vào giỏ</button>
+      </div>
+    </div>
+
+    <div class="product" data-name="Thỏ xanh to" data-price="3000000">
+      <span class="prod-badge badge-limited">Limited</span>
+      <div class="prod-img-wrap">
+        <img src="https://shop.stcolumbashospice.org.uk/cdn/shop/files/BASS6GRN__50328.webp?v=1756916472" alt="Thỏ xanh to" loading="lazy"/>
+      </div>
+      <div class="prod-info">
+        <h4>Thỏ xanh to</h4>
+        <p class="prod-price">3.000.000đ</p>
+        <button class="btn-add" onclick="addToCart(this)">+ Thêm vào giỏ</button>
+      </div>
+    </div>
+
+    <div class="product" data-name="Hạt dẻ cười bé nhỏ" data-price="699000">
+      <div class="prod-img-wrap">
+        <img src="https://phoenix-art-museum-store.myshopify.com/cdn/shop/files/A6PST__39284_1200x.jpg?v=1753998511" alt="Hạt dẻ cười bé nhỏ" loading="lazy"/>
+      </div>
+      <div class="prod-info">
+        <h4>Hạt dẻ cười bé nhỏ</h4>
+        <p class="prod-price">699.000đ</p>
+        <button class="btn-add" onclick="addToCart(this)">+ Thêm vào giỏ</button>
+      </div>
+    </div>
+
+    <div class="product" data-name="Rồng xanh đáng yêu" data-price="1200000">
+      <span class="prod-badge badge-hot">Hot</span>
+      <div class="prod-img-wrap">
+        <img src="https://cdn.webshopapp.com/shops/271750/files/463944549/650x650x2/jellycat-sky-dragon-large-50-cm.jpg" alt="Rồng xanh đáng yêu" loading="lazy"/>
+      </div>
+      <div class="prod-info">
+        <h4>Rồng xanh đáng yêu</h4>
+        <p class="prod-price">1.200.000đ</p>
+        <button class="btn-add" onclick="addToCart(this)">+ Thêm vào giỏ</button>
+      </div>
+    </div>
+
+    <div class="product" data-name="Gấu hươu" data-price="699000">
+      <div class="prod-img-wrap">
+        <img src="https://i5.walmartimages.com/asr/308d1ea7-9cfc-41ec-91d1-0d22d24f8781_1.2f139128ed5dcf5c88f3c78fab343829.jpeg" alt="Gấu hươu" loading="lazy"/>
+      </div>
+      <div class="prod-info">
+        <h4>Gấu hươu</h4>
+        <p class="prod-price">699.000đ</p>
+        <button class="btn-add" onclick="addToCart(this)">+ Thêm vào giỏ</button>
+      </div>
+    </div>
+
+    <div class="product" data-name="Gấu ong béo" data-price="799000">
+      <span class="prod-badge badge-new">New</span>
+      <div class="prod-img-wrap">
+        <img src="https://cdn11.bigcommerce.com/s-fz2bnmwg7y/images/stencil/1000w/products/4126/120019/HAP3BEE__51748.1736176736.jpg?c=1" alt="Gấu ong béo" loading="lazy"/>
+      </div>
+      <div class="prod-info">
+        <h4>Gấu ong béo</h4>
+        <p class="prod-price">799.000đ</p>
+        <button class="btn-add" onclick="addToCart(this)">+ Thêm vào giỏ</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     BỘ SƯU TẬP FUGGLER
+═══════════════════════════════════════ -->
+<section class="new-products" id="new-products">
+  <div class="section-head">
+    <h2>BỘ SƯU TẬP MỞ RỘNG</h2>
+    <p>GẤU XẤU (FUGGLER) — Dành cho người dũng cảm 😈</p>
+  </div>
+
+  <div class="product-grid fuggler-grid">
+
+    <div class="product fuggler-card" data-name="Fuggler đen sún răng" data-price="450000">
+      <div class="prod-img-wrap">
+        <img src="https://lennies.com/cdn/shop/files/zuru-fuggler-9-soft-plush-toy-gold-fuggs-hedge-grog-eyes-and-teeth-193052074430-1175351991.jpg?v=1750996777" alt="Fuggler đen sún răng" loading="lazy"/>
+      </div>
+      <div class="prod-info">
+        <h4>Fuggler đen sún răng</h4>
+        <p class="prod-price">450.000đ</p>
+        <button class="btn-add" onclick="addToCart(this)">+ Thêm vào giỏ</button>
+      </div>
+    </div>
+
+    <div class="product fuggler-card" data-name="Fuggler mix" data-price="500000">
+      <div class="prod-img-wrap">
+        <img src="https://www.toys4you.co.uk/cdn/shop/files/FugglerMisfitMonstersbyZURUPlushGrinneroMcGoo_1000x.png?v=1755090993" alt="Fuggler mix" loading="lazy"/>
+      </div>
+      <div class="prod-info">
+        <h4>Fuggler mix</h4>
+        <p class="prod-price">500.000đ</p>
+        <button class="btn-add" onclick="addToCart(this)">+ Thêm vào giỏ</button>
+      </div>
+    </div>
+
+    <div class="product fuggler-card" data-name="Fuggler xấu xí" data-price="500000">
+      <div class="prod-img-wrap">
+        <img src="https://static01.galaxus.com/productimages/1/1/5/4/5/3/5/2/3/2/0/5/7/3/3/4/7/4/7db7c2ba-cb1f-4ff1-8166-8040d11db02c_cropped.jpg_720.jpeg" alt="Fuggler xấu xí" loading="lazy"/>
+      </div>
+      <div class="prod-info">
+        <h4>Fuggler xấu xí</h4>
+        <p class="prod-price">500.000đ</p>
+        <button class="btn-add" onclick="addToCart(this)">+ Thêm vào giỏ</button>
+      </div>
+    </div>
+
+    <div class="product fuggler-card" data-name="Fuggler mắt hí đi bơi" data-price="550000">
+      <div class="prod-img-wrap">
+        <img src="https://www.yachew.com/cdn/shop/files/91_BopdBySL.jpg?v=1758413955" alt="Fuggler mắt hí đi bơi" loading="lazy"/>
+      </div>
+      <div class="prod-info">
+        <h4>Fuggler mắt hí đi bơi</h4>
+        <p class="prod-price">550.000đ</p>
+        <button class="btn-add" onclick="addToCart(this)">+ Thêm vào giỏ</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     SMALL BANNER SALE
+═══════════════════════════════════════ -->
+<section class="small-banner">
+  <div class="banner-inner">
+    <h2>🎉 Sale up to 50%</h2>
+    <p>Ưu đãi có hạn · Nhanh tay kẻo lỡ</p>
+    <button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Xem ngay →</button>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     NEWSLETTER
+═══════════════════════════════════════ -->
+<section class="newsletter" id="newsletter">
+  <div class="newsletter-inner">
+    <h2>Subscribe Newsletter</h2>
+    <p>Nhận ưu đãi độc quyền và thông báo sản phẩm mới nhất</p>
+    <div class="newsletter-box">
+      <input type="email" placeholder="Nhập email của bạn..."/>
+      <button onclick="handleSubscribe(this)">Đăng ký</button>
+    </div>
+    <p class="newsletter-note">🔒 Chúng tôi không chia sẻ email của bạn</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">BEARISH</div>
+      <p>Mỗi cái ôm là một câu chuyện yêu thương.</p>
+    </div>
+    <div class="footer-links">
+      <div>
+        <h5>Cửa hàng</h5>
+        <a href="#">Sản phẩm mới</a>
+        <a href="#">Bán chạy nhất</a>
+        <a href="#">Fuggler</a>
+      </div>
+      <div>
+        <h5>Hỗ trợ</h5>
+        <a href="#">Chính sách đổi trả</a>
+        <a href="#">Vận chuyển</a>
+        <a href="#">Liên hệ</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Bearish © 2026 &nbsp;·&nbsp; Email: Bearishloveyou@gmail.com</p>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════
+     FEATURE 3: CHAT BUBBLE
+═══════════════════════════════════════ -->
+<div class="chat-bubble" id="chatBubble" onclick="toggleChat()" aria-label="Chat hỗ trợ">
+  <span class="chat-icon">💬</span>
+  <span class="chat-label">Hỗ trợ</span>
+  <span class="chat-dot"></span>
+</div>
+
+<div class="chat-box" id="chatBox">
+  <div class="chat-box-header">
+    <div class="chat-agent">
+      <div class="agent-avatar">🐻</div>
+      <div>
+        <strong>Bearish Support</strong>
+        <span class="agent-status">● Đang hoạt động</span>
+      </div>
+    </div>
+    <button onclick="toggleChat()" aria-label="Đóng chat">✕</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg msg-agent">
+      <div class="msg-bubble">Xin chào! 🧸 Mình có thể giúp gì cho bạn hôm nay?</div>
+      <span class="msg-time">Vừa xong</span>
+    </div>
+  </div>
+  <div class="chat-quick-btns">
+    <button onclick="sendQuick('Tôi muốn hỏi về đơn hàng')">📦 Đơn hàng</button>
+    <button onclick="sendQuick('Tư vấn sản phẩm')">🧸 Tư vấn</button>
+    <button onclick="sendQuick('Chính sách đổi trả')">↩️ Đổi trả</button>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="Nhắn tin..." onkeydown="if(event.key==='Enter')sendChat()"/>
+    <button onclick="sendChat()">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     FEATURE 4: BACK TO TOP
+═══════════════════════════════════════ -->
+<button class="back-to-top" id="backToTop" aria-label="Lên đầu trang" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
+</button>
+
+
+<!-- ═══════════════════════════════════════
+     TOAST NOTIFICATION
+═══════════════════════════════════════ -->
+<div class="toast" id="toast"></div>
+
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════ -->
+<script>
+/* ── Dữ liệu giỏ hàng ── */
+let cart = [];
+
+/* ── Format tiền ── */
+function formatPrice(n) {
+  return n.toLocaleString('vi-VN') + 'đ';
+}
+
+/* ── Toast ── */
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+/* ── Add to cart ── */
+function addToCart(btn) {
+  const card = btn.closest('.product');
+  const name = card.dataset.name;
+  const price = parseInt(card.dataset.price);
+  const existing = cart.find(i => i.name === name);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ name, price, qty: 1 });
+  }
+  updateCartUI();
+  openCart();
+  showToast('🧸 Đã thêm "' + name + '" vào giỏ!');
+
+  /* bounce animation on btn */
+  btn.textContent = '✓ Đã thêm';
+  btn.style.background = '#6b3f23';
+  setTimeout(() => {
+    btn.textContent = '+ Thêm vào giỏ';
+    btn.style.background = '';
+  }, 1500);
+}
+
+function updateCartUI() {
+  const count = cart.reduce((s, i) => s + i.qty, 0);
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+  document.getElementById('cartCount').style.display = count > 0 ? 'flex' : 'none';
+
+  const list = document.getElementById('cartList');
+  const empty = document.getElementById('cartEmpty');
+  const footer = document.getElementById('cartFooter');
+
+  if (cart.length === 0) {
+    empty.style.display = 'block';
+    list.innerHTML = '';
+    footer.style.display = 'none';
+  } else {
+    empty.style.display = 'none';
+    footer.style.display = 'block';
+    list.innerHTML = cart.map((item, i) => `
+      <li class="cart-item">
+        <div class="cart-item-info">
+          <strong>${item.name}</strong>
+          <span>${formatPrice(item.price)}</span>
+        </div>
+        <div class="cart-item-controls">
+          <button onclick="changeQty(${i},-1)">−</button>
+          <span>${item.qty}</span>
+          <button onclick="changeQty(${i},1)">+</button>
+          <button class="cart-remove" onclick="removeItem(${i})">✕</button>
+        </div>
+      </li>
+    `).join('');
+    document.getElementById('cartTotal').textContent = formatPrice(total);
+  }
+}
+
+function changeQty(i, delta) {
+  cart[i].qty += delta;
+  if (cart[i].qty <= 0) cart.splice(i, 1);
+  updateCartUI();
+}
+
+function removeItem(i) {
+  cart.splice(i, 1);
+  updateCartUI();
+}
+
+/* ── Cart open/close ── */
+function openCart() {
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCart() {
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('cartToggle').addEventListener('click', openCart);
+document.getElementById('cartClose').addEventListener('click', closeCart);
+document.getElementById('cartOverlay').addEventListener('click', closeCart);
+
+
+/* ── Search ── */
+const allProducts = [
+  'Ngựa bông mềm mại','Túi trà bé nhỏ','Chú vịt buồn bã','Thỏ xanh to',
+  'Hạt dẻ cười bé nhỏ','Rồng xanh đáng yêu','Gấu hươu','Gấu ong béo',
+  'Fuggler đen sún răng','Fuggler mix','Fuggler xấu xí','Fuggler mắt hí đi bơi'
+];
+
+function doSearch(q) {
+  document.getElementById('searchInput').value = q;
+  handleSearch(q);
+}
+
+function handleSearch(q) {
+  const box = document.getElementById('searchResults');
+  if (!q.trim()) { box.innerHTML = ''; return; }
+  const matches = allProducts.filter(p => p.toLowerCase().includes(q.toLowerCase()));
+  if (matches.length === 0) {
+    box.innerHTML = '<p class="no-result">Không tìm thấy sản phẩm nào 😢</p>';
+  } else {
+    box.innerHTML = matches.map(m =>
+      `<div class="result-item" onclick="selectResult('${m}')">${highlight(m, q)}</div>`
+    ).join('');
+  }
+}
+
+function highlight(text, q) {
+  const re = new RegExp(`(${q})`, 'gi');
+  return text.replace(re, '<mark>$1</mark>');
+}
+
+function selectResult(name) {
+  closeSearch();
+  showToast('🔍 Đang xem: ' + name);
+  document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+}
+
+document.getElementById('searchInput').addEventListener('input', e => handleSearch(e.target.value));
+
+function openSearch() {
+  document.getElementById('searchOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('searchInput').focus(), 100);
+}
+
+function closeSearch() {
+  document.getElementById('searchOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('searchToggle').addEventListener('click', openSearch);
+document.getElementById('searchClose').addEventListener('click', closeSearch);
+
+document.getElementById('searchOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('searchOverlay')) closeSearch();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeSearch(); closeCart(); }
+});
+
+
+/* ── Chat ── */
+let chatOpen = false;
+const chatReplies = {
+  'đơn hàng': 'Vui lòng cho mình biết mã đơn hàng của bạn nhé! 📦',
+  'tư vấn': 'Bạn đang quan tâm đến loại gấu nào? Jellycat, Fuggler hay dòng khác? 🧸',
+  'đổi trả': 'Bearish hỗ trợ đổi trả trong 7 ngày kể từ ngày nhận hàng. Hàng phải còn nguyên vẹn nhé! ↩️',
+  'default': 'Cảm ơn bạn đã nhắn tin! Mình sẽ phản hồi trong vài phút. 🐻'
+};
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById('chatBox').classList.toggle('open', chatOpen);
+}
+
+function sendQuick(msg) {
+  addChatMsg(msg, 'user');
+  setTimeout(() => {
+    const key = Object.keys(chatReplies).find(k => msg.toLowerCase().includes(k));
+    addChatMsg(chatReplies[key || 'default'], 'agent');
+  }, 700);
+}
+
+function sendChat() {
+  const inp = document.getElementById('chatInput');
+  const msg = inp.value.trim();
+  if (!msg) return;
+  inp.value = '';
+  addChatMsg(msg, 'user');
+  setTimeout(() => {
+    const key = Object.keys(chatReplies).find(k => msg.toLowerCase().includes(k));
+    addChatMsg(chatReplies[key || 'default'], 'agent');
+  }, 800);
+}
+
+function addChatMsg(text, type) {
+  const box = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = `chat-msg msg-${type}`;
+  div.innerHTML = `<div class="msg-bubble">${text}</div><span class="msg-time">Vừa xong</span>`;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+
+/* ── Back to top ── */
+const btn = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  btn.classList.toggle('visible', window.scrollY > 400);
+});
+
+
+/* ── Newsletter ── */
+function handleSubscribe(button) {
+  const input = button.previousElementSibling;
+  if (!input.value.includes('@')) {
+    showToast('⚠️ Vui lòng nhập email hợp lệ!');
+    return;
+  }
+  showToast('🎉 Đăng ký thành công! Kiểm tra email nhé.');
+  input.value = '';
+}
+
+
+/* Init */
+updateCartUI();
+</script>
+
+</body>
+</html>
