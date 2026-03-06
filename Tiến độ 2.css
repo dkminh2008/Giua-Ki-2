@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-/* ── Variables ── */
 :root {
   --cream:      #fdf6ee;
   --warm:       #fffaf5;
@@ -25,7 +24,6 @@
   --transition:  0.28s cubic-bezier(.34,1.56,.64,1);
 }
 
-/* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
@@ -40,10 +38,6 @@ img { display: block; max-width: 100%; }
 ul { list-style: none; }
 button { font-family: var(--font-body); cursor: pointer; }
 
-
-/* =========================================
-   HEADER
-   ========================================= */
 .header {
   position: sticky;
   top: 0;
@@ -112,10 +106,6 @@ button { font-family: var(--font-body); cursor: pointer; }
   padding: 0 3px;
 }
 
-
-/* =========================================
-   HERO
-   ========================================= */
 .hero {
   min-height: 520px;
   display: flex;
@@ -193,10 +183,6 @@ button { font-family: var(--font-body); cursor: pointer; }
   box-shadow: 0 10px 32px rgba(107,63,35,.3);
 }
 
-
-/* =========================================
-   FEATURES STRIP
-   ========================================= */
 .features {
   display: flex;
   justify-content: space-around;
@@ -224,10 +210,6 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .feature p { font-size: .83rem; color: var(--muted); }
 
-
-/* =========================================
-   SECTION HEADINGS
-   ========================================= */
 .section-head {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -248,10 +230,6 @@ button { font-family: var(--font-body); cursor: pointer; }
   font-weight: 300;
 }
 
-
-/* =========================================
-   PRODUCTS
-   ========================================= */
 .products, .new-products {
   padding: 72px 60px;
 }
@@ -265,7 +243,6 @@ button { font-family: var(--font-body); cursor: pointer; }
   gap: 22px;
 }
 
-/* Product card */
 .product {
   position: relative;
   background: var(--white);
@@ -280,7 +257,6 @@ button { font-family: var(--font-body); cursor: pointer; }
   box-shadow: var(--shadow-lg);
 }
 
-/* Badge */
 .prod-badge {
   position: absolute;
   top: 12px; left: 12px;
@@ -297,7 +273,6 @@ button { font-family: var(--font-body); cursor: pointer; }
 .badge-new     { background: var(--caramel); color: #fff; }
 .badge-limited { background: var(--brown); color: #fff; }
 
-/* Image */
 .prod-img-wrap {
   width: 100%;
   aspect-ratio: 1/1;
@@ -316,7 +291,6 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .product:hover .prod-img-wrap img { transform: scale(1.06); }
 
-/* Info */
 .prod-info {
   padding: 1rem 1.1rem 1.25rem;
 }
@@ -356,7 +330,6 @@ button { font-family: var(--font-body); cursor: pointer; }
   transform: scale(1.02);
 }
 
-/* Fuggler cards — slightly different vibe */
 .fuggler-grid { grid-template-columns: repeat(4, 1fr); }
 
 .fuggler-card {
@@ -367,10 +340,6 @@ button { font-family: var(--font-body); cursor: pointer; }
   background: #f5ede4;
 }
 
-
-/* =========================================
-   SMALL BANNER
-   ========================================= */
 .small-banner {
   background: linear-gradient(135deg, var(--brown) 0%, #3d200e 100%);
   padding: 64px 60px;
@@ -416,10 +385,6 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .banner-inner button:hover { background: var(--cream); color: var(--brown); transform: translateY(-2px); }
 
-
-/* =========================================
-   NEWSLETTER
-   ========================================= */
 .newsletter {
   padding: 72px 60px;
   background: var(--cream);
@@ -476,10 +441,6 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .newsletter-note { font-size: .75rem; color: var(--muted); margin-top: 1rem; }
 
-
-/* =========================================
-   FOOTER
-   ========================================= */
 footer {
   background: var(--dark);
   color: rgba(255,255,255,.6);
@@ -529,10 +490,6 @@ footer {
   color: rgba(255,255,255,.3);
 }
 
-
-/* =========================================
-   FEATURE 1 — SEARCH OVERLAY
-   ========================================= */
 .search-overlay {
   position: fixed;
   inset: 0;
@@ -649,10 +606,6 @@ footer {
 
 .suggest-tag:hover { background: var(--caramel); color: #fff; }
 
-
-/* =========================================
-   FEATURE 2 — CART DRAWER
-   ========================================= */
 .cart-overlay {
   position: fixed;
   inset: 0;
@@ -811,10 +764,6 @@ footer {
 
 .btn-continue:hover { border-color: var(--caramel); color: var(--caramel); }
 
-
-/* =========================================
-   FEATURE 3 — CHAT BUBBLE
-   ========================================= */
 .chat-bubble {
   position: fixed;
   bottom: 90px; right: 28px;
@@ -987,10 +936,6 @@ footer {
 
 .chat-input-row button:hover { background: var(--brown); transform: scale(1.1); }
 
-
-/* =========================================
-   FEATURE 4 — BACK TO TOP
-   ========================================= */
 .back-to-top {
   position: fixed;
   bottom: 28px; right: 28px;
@@ -1011,10 +956,6 @@ footer {
 .back-to-top.visible { opacity: 1; pointer-events: all; transform: translateY(0); }
 .back-to-top:hover { background: var(--caramel); transform: translateY(-3px); }
 
-
-/* =========================================
-   TOAST
-   ========================================= */
 .toast {
   position: fixed;
   bottom: 36px;
@@ -1036,10 +977,6 @@ footer {
 
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-
-/* =========================================
-   RESPONSIVE
-   ========================================= */
 @media (max-width: 1024px) {
   .header { padding: 0 30px; }
   .products, .new-products { padding: 56px 30px; }
@@ -1069,3 +1006,4 @@ footer {
 @media (max-width: 480px) {
   .product-grid { gap: 12px; }
 }
+
