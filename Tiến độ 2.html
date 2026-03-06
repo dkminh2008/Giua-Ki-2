@@ -9,10 +9,6 @@
   <link rel="stylesheet" href="TD2.css"/>
 </head>
 <body>
-
-<!-- ═══════════════════════════════════════
-     HEADER
-═══════════════════════════════════════ -->
 <header class="header">
   <div class="logo">BEARISH</div>
 
@@ -24,14 +20,12 @@
   </nav>
 
   <div class="header-actions">
-    <!-- Search trigger -->
     <button class="icon-btn" id="searchToggle" aria-label="Tìm kiếm">
       <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
     </button>
 
-    <!-- Cart trigger -->
     <button class="icon-btn" id="cartToggle" aria-label="Giỏ hàng">
       <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
@@ -43,10 +37,6 @@
   </div>
 </header>
 
-
-<!-- ═══════════════════════════════════════
-     FEATURE 1: SEARCH OVERLAY
-═══════════════════════════════════════ -->
 <div class="search-overlay" id="searchOverlay">
   <div class="search-container">
     <button class="search-close" id="searchClose" aria-label="Đóng">✕</button>
@@ -68,10 +58,6 @@
   </div>
 </div>
 
-
-<!-- ═══════════════════════════════════════
-     FEATURE 2: SLIDE-OUT CART
-═══════════════════════════════════════ -->
 <div class="cart-overlay" id="cartOverlay"></div>
 <aside class="cart-drawer" id="cartDrawer" aria-label="Giỏ hàng">
   <div class="cart-header">
@@ -97,9 +83,6 @@
 </aside>
 
 
-<!-- ═══════════════════════════════════════
-     HERO
-═══════════════════════════════════════ -->
 <section class="hero">
   <div class="hero-text">
     <span class="hero-tag">✦ BST Xuân – Hè 2026</span>
@@ -109,10 +92,6 @@
   </div>
 </section>
 
-
-<!-- ═══════════════════════════════════════
-     FEATURES STRIP (web features)
-═══════════════════════════════════════ -->
 <section class="features">
   <div class="feature">
     <div class="feature-icon">🚚</div>
@@ -137,9 +116,6 @@
 </section>
 
 
-<!-- ═══════════════════════════════════════
-     SẢN PHẨM NỔI BẬT
-═══════════════════════════════════════ -->
 <section class="products" id="products">
   <div class="section-head">
     <h2>CÁC SẢN PHẨM NỔI BẬT</h2>
@@ -244,10 +220,6 @@
   </div>
 </section>
 
-
-<!-- ═══════════════════════════════════════
-     BỘ SƯU TẬP FUGGLER
-═══════════════════════════════════════ -->
 <section class="new-products" id="new-products">
   <div class="section-head">
     <h2>BỘ SƯU TẬP MỞ RỘNG</h2>
@@ -303,10 +275,6 @@
   </div>
 </section>
 
-
-<!-- ═══════════════════════════════════════
-     SMALL BANNER SALE
-═══════════════════════════════════════ -->
 <section class="small-banner">
   <div class="banner-inner">
     <h2>🎉 Sale up to 50%</h2>
@@ -315,10 +283,6 @@
   </div>
 </section>
 
-
-<!-- ═══════════════════════════════════════
-     NEWSLETTER
-═══════════════════════════════════════ -->
 <section class="newsletter" id="newsletter">
   <div class="newsletter-inner">
     <h2>Subscribe Newsletter</h2>
@@ -331,10 +295,6 @@
   </div>
 </section>
 
-
-<!-- ═══════════════════════════════════════
-     FOOTER
-═══════════════════════════════════════ -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
@@ -361,10 +321,6 @@
   </div>
 </footer>
 
-
-<!-- ═══════════════════════════════════════
-     FEATURE 3: CHAT BUBBLE
-═══════════════════════════════════════ -->
 <div class="chat-bubble" id="chatBubble" onclick="toggleChat()" aria-label="Chat hỗ trợ">
   <span class="chat-icon">💬</span>
   <span class="chat-label">Hỗ trợ</span>
@@ -403,44 +359,25 @@
   </div>
 </div>
 
-
-<!-- ═══════════════════════════════════════
-     FEATURE 4: BACK TO TOP
-═══════════════════════════════════════ -->
 <button class="back-to-top" id="backToTop" aria-label="Lên đầu trang" onclick="window.scrollTo({top:0,behavior:'smooth'})">
   <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
     <polyline points="18 15 12 9 6 15"/>
   </svg>
 </button>
 
-
-<!-- ═══════════════════════════════════════
-     TOAST NOTIFICATION
-═══════════════════════════════════════ -->
 <div class="toast" id="toast"></div>
 
-
-<!-- ═══════════════════════════════════════
-     JAVASCRIPT
-═══════════════════════════════════════ -->
 <script>
-/* ── Dữ liệu giỏ hàng ── */
 let cart = [];
-
-/* ── Format tiền ── */
 function formatPrice(n) {
   return n.toLocaleString('vi-VN') + 'đ';
 }
-
-/* ── Toast ── */
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2600);
 }
-
-/* ── Add to cart ── */
 function addToCart(btn) {
   const card = btn.closest('.product');
   const name = card.dataset.name;
@@ -510,7 +447,6 @@ function removeItem(i) {
   updateCartUI();
 }
 
-/* ── Cart open/close ── */
 function openCart() {
   document.getElementById('cartDrawer').classList.add('open');
   document.getElementById('cartOverlay').classList.add('show');
@@ -527,8 +463,6 @@ document.getElementById('cartToggle').addEventListener('click', openCart);
 document.getElementById('cartClose').addEventListener('click', closeCart);
 document.getElementById('cartOverlay').addEventListener('click', closeCart);
 
-
-/* ── Search ── */
 const allProducts = [
   'Ngựa bông mềm mại','Túi trà bé nhỏ','Chú vịt buồn bã','Thỏ xanh to',
   'Hạt dẻ cười bé nhỏ','Rồng xanh đáng yêu','Gấu hươu','Gấu ong béo',
@@ -588,8 +522,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { closeSearch(); closeCart(); }
 });
 
-
-/* ── Chat ── */
 let chatOpen = false;
 const chatReplies = {
   'đơn hàng': 'Vui lòng cho mình biết mã đơn hàng của bạn nhé! 📦',
@@ -632,15 +564,11 @@ function addChatMsg(text, type) {
   box.scrollTop = box.scrollHeight;
 }
 
-
-/* ── Back to top ── */
 const btn = document.getElementById('backToTop');
 window.addEventListener('scroll', () => {
   btn.classList.toggle('visible', window.scrollY > 400);
 });
 
-
-/* ── Newsletter ── */
 function handleSubscribe(button) {
   const input = button.previousElementSibling;
   if (!input.value.includes('@')) {
@@ -651,10 +579,9 @@ function handleSubscribe(button) {
   input.value = '';
 }
 
-
-/* Init */
 updateCartUI();
 </script>
 
 </body>
 </html>
+
